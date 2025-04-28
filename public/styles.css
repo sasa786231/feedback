@@ -1,0 +1,181 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+.container {
+  background: white;
+  margin: 40px 20px;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  max-width: 600px;
+  width: 100%;
+  animation: slideUp 0.8s ease forwards;
+  transition: box-shadow 0.3s ease;
+}
+.container:hover {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+.description {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #555;
+  font-size: 1.1em;
+  font-style: italic;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animated-description {
+  opacity: 1;
+  transform: translateY(0);
+  animation: bounceIn 1s ease;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #34495e;
+  transition: color 0.3s ease;
+}
+select, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+select:focus, textarea:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 8px rgba(41, 128, 185, 0.5);
+  outline: none;
+  transform: scale(1.02);
+}
+button {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(41, 128, 185, 0.6);
+}
+button:hover {
+  background-color: #1c5980;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(28, 89, 128, 0.8);
+}
+.hidden {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.person-details {
+  background: #ecf0f1;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #2c3e50;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+  animation: fadeIn 0.5s ease;
+  transition: transform 0.3s ease;
+}
+.person-details.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+.person-details.hide {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+.rating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.star {
+  font-size: 30px;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  margin: 0 5px;
+}
+.star.selected,
+.star:hover,
+.star:hover ~ .star {
+  color: #f39c12;
+  transform: scale(1.2);
+}
+
+@keyframes starPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.star.animate-pop {
+  animation: starPop 0.3s ease;
+}
+.header-button {
+  display: block;
+  margin: 0 auto 30px auto;
+  max-width: 200px;
+  background-color: #27ae60;
+  border-radius: 6px;
+  text-align: center;
+  padding: 12px 0;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(39, 174, 96, 0.5);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.header-button:hover {
+  background-color: #1e8449;
+  box-shadow: 0 6px 14px rgba(30, 132, 73, 0.7);
+  transform: scale(1.05);
+}
