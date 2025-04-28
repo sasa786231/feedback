@@ -1,0 +1,12 @@
+{
+  "name": "feedback-portal",
+  "version": "1.0.0",
+  "description": "Feedback Portal for MLAs and MPs",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
