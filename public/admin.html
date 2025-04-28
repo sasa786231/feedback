@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback Admin</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #loginForm, #feedbackTable { max-width: 600px; margin: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+    #logoutBtn { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Feedback Admin Panel</h1>
+  <div id="loginForm">
+    <label for="password">Enter Admin Password:</label>
+    <input type="password" id="password" />
+    <button id="loginBtn">Login</button>
+    <p id="loginError" style="color: red; display: none;">Incorrect password</p>
+  </div>
+  <div id="feedbackTable" style="display:none;">
+    <button id="logoutBtn">Logout</button>
+    <h2>Submitted Feedbacks</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>District</th>
+          <th>Constituency</th>
+          <th>Name</th>
+          <th>Party</th>
+          <th>Rating</th>
+          <th>Feedback</th>
+        </tr>
+      </thead>
+      <tbody id="feedbackBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const feedbackTable = document.getElementById('feedbackTable');
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const passwordInput = document.getElementById('password');
+    const loginError = document.getElementById('loginError');
+    const feedbackBody = document.getElementById('feedbackBody');
+
+    loginBtn.addEventListener('click', async () => {
+      const password = passwordInput.value;
+      if (!password) return;
+
+      // Try to fetch feedbacks with basic auth
+      try {
+        const response = await fetch('/feedbacks', {
+          headers: {
+            'Authorization': 'Basic ' + btoa('admin:' + password)
+          }
+        });
+        if (response.status === 401) {
+          loginError.style.display = 'block';
+          return;
+        }
+        if (!response.ok) {
+          loginError.textContent = 'Failed to fetch feedbacks';
+          loginError.style.display = 'block';
+          return;
+        }
+        const feedbacks = await response.json();
+        loginError.style.display = 'none';
+        loginForm.style.display = 'none';
+        feedbackTable.style.display = 'block';
+        renderFeedbacks(feedbacks);
+      } catch (error) {
+        loginError.textContent = 'Error: ' + error.message;
+        loginError.style.display = 'block';
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      feedbackTable.style.display = 'none';
+      loginForm.style.display = 'block';
+      passwordInput.value = '';
+      feedbackBody.innerHTML = '';
+      loginError.style.display = 'none';
+    });
+
+    function renderFeedbacks(feedbacks) {
+      feedbackBody.innerHTML = '';
+      feedbacks.forEach(fb => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${fb.role}</td>
+          <td>${fb.district}</td>
+          <td>${fb.constituency}</td>
+          <td>${fb.name}</td>
+          <td>${fb.party}</td>
+          <td>${fb.rating}</td>
+          <td>${fb.feedback}</td>
+        `;
+        feedbackBody.appendChild(tr);
+      });
+    }
+  </script>
+</body>
+</html>

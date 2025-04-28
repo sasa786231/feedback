@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Feedback Website</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Feedback Portal</h1>
+    <p class="description">Please provide your feedback by selecting the role, district, constituency, and the respective person. Rate your experience and share your thoughts.</p>
+    <a href="#" id="startButton" class="header-button">Go to Feedback Form</a>
+    <div id="formContainer" class="hidden">
+      <form id="feedbackForm">
+        <label for="roleSelect">Select Role (MLA/MP):</label>
+        <select id="roleSelect" required>
+          <option value="" disabled selected>Select role</option>
+          <option value="MLA">MLA</option>
+          <option value="MP">MP</option>
+        </select>
+
+      <label for="districtSelect" class="hidden" id="districtLabel">Select District:</label>
+      <select id="districtSelect" class="hidden" required>
+        <option value="" disabled selected>Select district</option>
+      </select>
+
+      <label for="constituencySelect" class="hidden" id="constituencyLabel">Select Constituency:</label>
+      <select id="constituencySelect" class="hidden" required>
+        <option value="" disabled selected>Select constituency</option>
+      </select>
+
+      <div id="personDetails" class="person-details hidden"></div>
+
+      <label for="feedbackBox" class="hidden" id="feedbackLabel">Your Feedback:</label>
+      <textarea id="feedbackBox" rows="5" placeholder="Write your feedback here..." class="hidden" required></textarea>
+
+      <label class="hidden" id="ratingLabel">Rate (1-5 stars):</label>
+      <div class="rating hidden" id="ratingStars">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
+
+      <button type="submit" class="hidden" id="submitBtn">Submit Feedback</button>
+    </form>
+    </div>
+
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
